@@ -14,8 +14,8 @@ import authRouter from './routes/authRoute.js'
 
 const app = express()
 const port = process.env.PORT || 4000
-connectDb()
-connectCloudinary()
+await connectDb()
+await connectCloudinary()
 
 // Middlewares
 
@@ -24,7 +24,7 @@ const FRONTEND_URL= process.env.FRONTEND_URL;
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    FRONTEND_URL
+    FRONTEND_URL || ''
   ],
   credentials: true
 }))
@@ -39,7 +39,7 @@ app.use('/api/order', orderRouter)
 app.use('/api/auth', authRouter)
 
 app.get('/', (req,res) => {
-    res.send("API working")
+    res.send("API working...")
 })
 
 // app.listen(port, () => {
