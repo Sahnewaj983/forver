@@ -18,9 +18,7 @@ const authUser = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = {
-      id: decoded.userId || decoded.id //userId comes from authController while jwt.sign
-    };
+    req.userId =  decoded.userId || decoded.id;  //userId comes from authController while jwt.sign
 
     next();
 

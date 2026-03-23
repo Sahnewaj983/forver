@@ -7,8 +7,8 @@ import crypto from 'crypto';
 
 
 
-const createToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET)
+const createToken = (userId) => {
+  return jwt.sign({ userId }, process.env.JWT_SECRET)
 }
 
 // Route for user login
@@ -233,7 +233,7 @@ const adminLogin = async (req, res) => {
 export const getCurrentUser = async (req, res) => {
   try {
 
-    const userId = req.user.id;
+    const userId = req.userId; //change
 
     const user = await userModel
       .findById(userId)
