@@ -2,9 +2,9 @@ import jwt from 'jsonwebtoken'
 
 const authUser = async (req, res, next) => {
 
-  const headerToken = req.headers.token;
   const cookieToken = req.cookies?.token;
-
+  const headerToken = req.headers.token;
+  
   const token = headerToken ? headerToken : cookieToken;
 
   if (!token) {
@@ -18,7 +18,7 @@ const authUser = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.userId =  decoded.userId || decoded.id;  //userId comes from authController while jwt.sign
+    req.userId = decoded.userId || decoded.id;  //userId comes from authController while jwt.sign
 
     next();
 
