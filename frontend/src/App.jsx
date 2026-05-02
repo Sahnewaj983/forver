@@ -1,5 +1,5 @@
 import React from 'react'
-import {Routes, Route} from "react-router-dom"
+import {Routes, Route, useLocation} from "react-router-dom"
 import Home from './pages/Home'
 import Collection from './pages/Collection'
 import About from './pages/About'
@@ -18,11 +18,21 @@ import { ToastContainer, toast } from 'react-toastify';
 import Verify from './pages/Verify'
 
 const App = () => {
+
+  const location = useLocation();
+
+  // routes where you DON'T want header/footer
+  const noLayoutRoutes = ["/login", "/forgot-password", "/reset-password"];
+
+  const hideLayout = noLayoutRoutes.some(path =>
+    location.pathname.startsWith(path)
+  );
+
   return (
     <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] ">
       <ToastContainer />
-      <Navbar/>
-      <SearchBar />
+      {!hideLayout && <Navbar />}
+      {!hideLayout && <SearchBar />}
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/collection" element={<Collection/>} />
@@ -37,7 +47,7 @@ const App = () => {
           <Route path="/orders" element={<Orders/>} />
           <Route path="/verify" element={<Verify/>} />
       </Routes>
-      <Footer />
+      {!hideLayout && <Footer />}
     </div>
   )
 }
