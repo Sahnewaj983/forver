@@ -60,7 +60,7 @@ const Navbar = () => {
                 <button
                     onClick={() => {
                         if (adminUrl) {
-                            window.location.href = adminUrl;
+                            window.location.href = `${adminUrl}`;
                         } else {
                             console.error("Admin URL not defined");
                         }
