@@ -9,6 +9,7 @@ const Navbar = () => {
     const [visible, setVisible] = useState(false);
 
     const { setShowSearch, getCartCount, navigate, token, setToken, setCartItems, backendUrl } = useContext(ShopContext);
+    const adminUrl  = import.meta.env.VITE_ADMIN_LOGIN
 
     const logout = async () => {
         try {
@@ -56,6 +57,7 @@ const Navbar = () => {
             </ul>
 
             <div className="flex items-center gap-6">
+                <button onClick={ () => window.open(`${adminUrl}`, '_self') } className='inline-flex items-center bg-black text-white text-xs  px-4 py-1 rounded-full '>Admin</button>
                 <img onClick={() => setShowSearch(true)} src={assets.search_icon} className="w-5 cursor-pointer" alt="" />
 
                 <div className="group relative">

@@ -21,10 +21,11 @@ await connectCloudinary()
 
 app.use(express.json())
 const FRONTEND_URL= process.env.FRONTEND_URL;
+const ADMIN_URL = process.env.ADMIN_URL
 app.use(cors({
   origin: [
-    "http://localhost:5173",
-    FRONTEND_URL || ''
+    ADMIN_URL,
+    FRONTEND_URL
   ],
   credentials: true
 }))
